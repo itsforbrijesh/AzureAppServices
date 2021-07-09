@@ -16,7 +16,7 @@
     },
     "createOrUpdateCatalogServicePlan": {
       "type": "bool",
-      "defaultValue": true,
+      "defaultValue": false,
       "metadata": {
         "description": "If set to false, provide the name and resource group of an existing service plan in the 'catalogServicePlanName' and 'servicePlanResourceGroupName' parameters. Otherwise a new plan will be created with the supplied name"
       }
@@ -53,6 +53,13 @@
       "defaultValue": "[resourceGroup().name]",
       "metadata": {
         "description": "Optional name of the resource group for the existing app service plan. If creating a new plan, leave as the default value"
+      }
+    },
+    "createOrUpdateCatalogSqlSrvr": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "If set to false, Sql Server will not be created "
       }
     },
     "catalogSqlServerName": {
@@ -212,7 +219,8 @@
           "properties": {
             "inrule:repository:service:connectionString": "[concat('Server=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('catalogSqlServerName'))).fullyQualifiedDomainName, ',1433;Database=', parameters('catalogSqlDbName'), ';User Id=', parameters('catalogSqlServerUsername'), ';Password=', parameters('catalogSqlServerPassword'), ';')]",
             "inrule:repository:licensing:licenseFolder": "D:\\home\\site\\wwwroot",
-            "inrule:logging:level": "Warn"
+            "inrule:logging:level": "Warn",
+            "inrule:version":"[parameters('inRuleVersion')]"
           }
         }
       ]
@@ -255,12 +263,14 @@
             "[concat('Microsoft.Web/sites/', parameters('catalogManagerServiceName'))]"
           ],
           "properties": {
-            "InRule.Catalog.Uri": "[concat('https://', parameters('catalogServiceName') ,'.azurewebsites.net/service.svc')]"
+            "InRule.Catalog.Uri": "[concat('https://', parameters('catalogServiceName') ,'.azurewebsites.net/service.svc')]",
+            "inrule:version":"[parameters('inRuleVersion')]"
           }
         }
       ]
     },
     {
+      "condition": "[parameters('createOrUpdateCatalogSqlSrvr')]",
       "name": "[parameters('catalogSqlServerName')]",
       "type": "Microsoft.Sql/servers",
       "location": "[resourceGroup().location]",
