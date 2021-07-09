@@ -267,7 +267,7 @@
             "inrule:sf:api:securityToken": "[parameters('sfSecurityToken')]",
             "inrule:sf:api:consumerKey": "[parameters('sfConsumerKey')]",
             "inrule:sf:api:consumerSecret": "[parameters('sfConsumerSecret')]",
-            "inrule:sf:catalog:label": "LIVE",
+            "inrule:sf:catalog:label": "",
             "inrule:sf:catalog:user": "[parameters('catalogUser')]",
             "inrule:sf:catalog:password": "[parameters('catalogPassword')]",
             "inrule:sf:catalog:sso": "false",
