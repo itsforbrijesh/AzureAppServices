@@ -282,6 +282,7 @@
       },
       "resources": [
         {
+          "condition": "[parameters('createOrUpdateCatalogSqlSrvr')]",
           "name": "AllowAllWindowsAzureIps",
           "type": "firewallrules",
           "location": "[resourceGroup().location]",
@@ -295,6 +296,7 @@
           }
         },
         {
+          "condition": "[parameters('createOrUpdateCatalogSqlSrvr')]",
           "name": "[parameters('catalogSqlDbName')]",
           "type": "databases",
           "location": "[resourceGroup().location]",
