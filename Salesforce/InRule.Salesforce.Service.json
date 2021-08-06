@@ -98,7 +98,7 @@
     },
     "appServicePlanSkuName": {
       "type": "string",
-      "defaultValue": "F1",
+      "defaultValue": "P1",
       "allowedValues": [
         "F1",
         "D1",
@@ -197,7 +197,7 @@
       "name": "[variables('appInsightsResourceName')]",
       "type": "Microsoft.Insights/components",
       "apiVersion": "2018-05-01-preview",
-      "location": "[parameters('appInsightsLocation')]",
+      "location": "[parameters('rglocation')]",
       "kind": "web",
       "tags": {
         "[concat('hidden-link:', resourceGroup().id, '/providers/Microsoft.Web/sites/', parameters('appInsightsResourceName'))]": "Resource"
@@ -237,7 +237,7 @@
       "name": "[parameters('appServiceName')]",
       "type": "Microsoft.Web/sites",
       "apiVersion": "2016-08-01",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('rglocation')]",
       "dependsOn": [
         "[resourceId(parameters('servicePlanResourceGroupName'), 'Microsoft.Resources/deployments', 'AppServicePlanTemplate')]"
       ],
