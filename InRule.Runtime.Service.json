@@ -10,7 +10,7 @@
     },
     "createOrUpdateExecutionServicePlan": {
       "type": "bool",
-      "defaultValue": true,
+      "defaultValue": false,
       "metadata": {
         "description": "If set to false, provide the name and resource group of an existing service plan in the 'executionServicePlanName' and 'servicePlanResourceGroupName' parameters. Otherwise a new plan will be created with the supplied name"
       }
@@ -156,7 +156,8 @@
           "properties": {
             "inrule:runtime:service:catalog:catalogServiceUri": "[parameters('catalogUri')]",
             "inrule:repository:licensing:licenseFolder": "D:\\home\\site\\wwwroot",
-            "inrule:logging:level": "Warn"
+            "inrule:logging:level": "Warn",
+			"inrule:version":"[parameters('inRuleVersion')]"
           }
         }
       ]
